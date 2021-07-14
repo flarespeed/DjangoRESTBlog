@@ -1,0 +1,16 @@
+from rest_framework import permissions
+
+class AdminOrReadOnly(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        if request.user.is_staff():
+            return True
+
+        if obj.thread:
+            if request.user == obj.threaad.user:
+                return True
+
+        return obj.user == request.user
