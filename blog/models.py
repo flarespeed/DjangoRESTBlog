@@ -9,7 +9,7 @@ class Thread(models.Model):
     content = models.TextField(max_length=800)
 
 class Comment(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.PROTECT, related_name='comments')
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='comments')
     time = models.DateTimeField(default=timezone.now)
     content = models.TextField(max_length=800)
