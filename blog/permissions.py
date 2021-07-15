@@ -9,12 +9,17 @@ class AdminOrReadOnly(permissions.BasePermission):
         if request.user.is_staff:
             return True
 
+        fullpermission = False
+
         try:
-            if request.user == obj.thread.user:
-                return True
+            fullpermission = obj.user == request.user
         except AttributeError:
             pass
         try:
-            return obj.user == request.user
+            if request.user == obj.thread.user:
+                if request.method in ['DELETE', 'POST']:
+                    return True
         except AttributeError:
-            return obj == request.user
+            if not fullpermission:
+                fullpermission = obj == request.user
+        return fullpermission

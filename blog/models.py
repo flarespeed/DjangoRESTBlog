@@ -8,6 +8,9 @@ class Thread(models.Model):
     title = models.TextField(max_length=100)
     content = models.TextField(max_length=800)
 
+    def __str__(self):
+        return self.title + "-" + self.user.username
+
 class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='comments')
