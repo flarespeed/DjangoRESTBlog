@@ -6,11 +6,15 @@ class AdminOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        if request.user.is_staff():
+        if request.user.is_staff:
             return True
 
-        if obj.thread:
-            if request.user == obj.threaad.user:
+        try:
+            if request.user == obj.thread.user:
                 return True
-
-        return obj.user == request.user
+        except AttributeError:
+            pass
+        try:
+            return obj.user == request.user
+        except AttributeError:
+            return obj == request.user
