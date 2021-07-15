@@ -21,5 +21,7 @@ class AdminOrReadOnly(permissions.BasePermission):
                     return True
         except AttributeError:
             if not fullpermission:
+                if request.method == 'DELETE':
+                    return False
                 fullpermission = obj == request.user
         return fullpermission

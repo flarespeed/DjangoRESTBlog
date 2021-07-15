@@ -16,4 +16,3 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='comments')
     time = models.DateTimeField(default=timezone.now)
     content = models.TextField(max_length=800)
-
