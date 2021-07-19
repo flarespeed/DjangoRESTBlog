@@ -24,6 +24,7 @@ class NonRecursiveCommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields = ['url', 'user', 'time', 'content']
+        extra_kwargs = {'user': {'read_only': True},'url': {'read_only': True}}
 
 class ThreadSerializer(serializers.HyperlinkedModelSerializer):
     comments = NonRecursiveCommentSerializer(many=True, read_only=True)
@@ -31,9 +32,11 @@ class ThreadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Thread
         fields = ['url', 'user', 'time', 'content', 'title', 'comments']
+        extra_kwargs = {'user': {'read_only': True},'url': {'read_only': True}}
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
         fields = ['url', 'thread', 'user', 'time', 'content']
+        extra_kwargs = {'user': {'read_only': True},'url': {'read_only': True}}
