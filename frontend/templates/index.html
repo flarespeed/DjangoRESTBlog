@@ -26,23 +26,16 @@
         el: '#app',
         delimiters: ['[[',']]'],
         data: {
-
+          threads: [{title: "test thread", comments: 4, url: "testurl"},],
+          threadslist: [],
         },
         methods: {
-          // axios({
-          //   method: 'post',
-          //   url: '{% url 'todos:delete' %}',
-          //   headers: {
-          //     'X-CSRFToken': '{{csrf_token}}'
-          //   },
-          //   data: {
-          //     'id': todo.id,
-          //   }
-          // }).then(response => {
-          //   if (response.data){
-          //     this.errorMessage = response.data
-          //   }
-          // })
+          axios({
+            method: 'get',
+            url: '{% url 'blog:threads-list' %}',
+          }).then(response => {
+            this.threadslist == response.data
+          })
         }
       })
     </script>
