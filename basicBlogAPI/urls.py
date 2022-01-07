@@ -30,6 +30,7 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('token-request/', token_views.obtain_auth_token),
     path('admin/', admin.site.urls),
+    path('frontend/', include('frontend.urls')),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
