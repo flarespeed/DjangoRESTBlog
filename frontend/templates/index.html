@@ -30,12 +30,14 @@
           threadslist: [],
         },
         methods: {
-          axios({
-            method: 'get',
-            url: '{% url 'blog:threads-list' %}',
-          }).then(response => {
-            this.threadslist == response.data
-          })
+          getThreads: function(){
+            axios({
+              method: 'get',
+              url: '{% url 'blog:threads-list' %}',
+            }).then(response => {
+              this.threadslist == response.data
+            })
+          }
         }
       })
     </script>
