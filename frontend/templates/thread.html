@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>blogmockup</title>
+    <style type="text/css">
+
+    </style>
+  </head>
+  <body>
+    <nav>
+      login stuff
+    </nav>
+    <div id="app">
+      <div class="threadtitle"><a :href="thread.url">[[thread.title]]</a></div>
+      
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],
+        data: {
+          threads: [{title: "test thread", comments: 4, url: "testurl"},],
+          threadslist: [],
+        },
+        methods: {
+          getThreads: function(){
+            axios({
+              method: 'get',
+              url: '{% url 'blog:thread-{{threadURL}}' %}',
+            }).then(response => {
+              this.threadslist == response.data
+            })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
