@@ -33,9 +33,9 @@
           getThreads: function(){
             axios({
               method: 'get',
-              url: '{% url 'blog:threads-list' %}',
+              url: '{% url 'thread-list' %}',
             }).then(response => {
-              this.threadslist == response.data
+              this.threadlist == response.data
             })
           }
         }

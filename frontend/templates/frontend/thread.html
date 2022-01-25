@@ -39,7 +39,7 @@
           getThreads: function(){
             axios({
               method: 'get',
-              url: '{% url 'blog:thread-{{threadURL}}' %}',
+              url: '{% url 'thread-{{threadURL}}' %}',
             }).then(response => {
               this.rawdata == response.data
             })
